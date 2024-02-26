@@ -1,5 +1,4 @@
 const {City} =require('../models/index')
-
 class CityRepository{
     async createCity({name}){
         try{
@@ -34,16 +33,18 @@ class CityRepository{
         }
         catch(err){
             console.log("Something went wrong in the repo layer")
+            throw err;
         }
     }
 
     async getCity(cityId){
         try{
-           const city=await City.findByPk(cityId)
+           const city=await City.findById(cityId)
            return city;
         }
         catch(err){
             console.log("Something went wrong in the repo layer")
+            throw err;
         }
     }
 }
