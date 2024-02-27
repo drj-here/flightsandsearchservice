@@ -1,3 +1,4 @@
+const {Op}=require('sequelize')
 const {City} =require('../models/index')
 class CityRepository{
     async createCity({name}){
@@ -24,22 +25,20 @@ class CityRepository{
 
     async updateCity(cityId,data){
         try{
-           const city=await City.update(data,{
-            where:{
-                id:cityId
-            }
-           })
+           const city=await City.findByPk(cityId)
+           city.name=data.name;
+           await city.save();
            return city;
         }
         catch(err){
             console.log("Something went wrong in the repo layer")
-            throw err;
+            throw err.message;
         }
     }
 
     async getCity(cityId){
         try{
-           const city=await City.findById(cityId)
+           const city=await City.findByPk(cityId)
            return city;
         }
         catch(err){
@@ -48,8 +47,19 @@ class CityRepository{
         }
     }
 
-    async getAllCities(){
+    async getAllCities(filter){
         try{
+            if(filter.name){
+                const cities=await City.findAll({
+                    where:{
+                        name:{
+                            [Op.startsWith]:filter.name
+                        }
+                    }
+                })
+                console.log(cities)
+                return cities;
+            }
            const cities=await City.findAll()
            return cities;
         }

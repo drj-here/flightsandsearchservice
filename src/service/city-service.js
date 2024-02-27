@@ -28,7 +28,7 @@ class CityService{
     }
 
     async updateCity(cityId,data){
-        try{
+        try{ 
             const city=await this.cityRepository.updateCity(cityId,data);
             return city;
         }
@@ -49,9 +49,9 @@ class CityService{
         }
     }
 
-    async getAllCities(){
+    async getAllCities(filter){
         try{
-            const city=await this.cityRepository.getAllCities();
+            const city=await this.cityRepository.getAllCities({name:filter.name});
             return city;
         }
         catch(error){
