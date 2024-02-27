@@ -1,10 +1,10 @@
 const {Op}=require('sequelize')
 const {City} =require('../models/index')
 class CityRepository{
-    async createCity({name}){
-        try{
-            const city=await City.create({name})
-            return city;
+    async createCity(cities){
+        try{ 
+            const response=await City.bulkCreate(cities)
+            return response;
         }
         catch(error){
            throw error;
@@ -66,6 +66,18 @@ class CityRepository{
         catch(err){
             console.log("Something went wrong in the repo layer")
             throw err.message;
+        }
+    }
+
+    async getCityAirports(cityId){
+        try{
+            const city=await City.findByPk(cityId)
+            const airports=await city.getAirports()
+            return airports;
+        }
+        catch(error){
+            console.log("Something went wrong in the repo layer")
+            throw error;
         }
     }
 }
