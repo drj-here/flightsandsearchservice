@@ -23,9 +23,19 @@ class FlightService{
         }
     }
 
+    async getAllFlight(data){
+        try{
+           const flights=await this.flightRepository.getAllFlight(data)
+           return flights;
+        }
+        catch(error){
+            console.log("Something went wrong in service")
+            throw error;
+        }
+    }
     async deleteFlight(flightId){
         try{
-            const response=await this.FlightRepository.deleteFlightFlight(flightId)
+            const response=await this.FlightRepository.deleteFlight(flightId)
             return response;
         }
         catch(error){
