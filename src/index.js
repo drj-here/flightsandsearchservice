@@ -19,9 +19,7 @@ const setupAndStartServer=async ()=>{
         // const city=await City.findOne({where:{id:4}})
         // const airports=await city.getAirports()
         // console.log(airports)
-        await Airplane.create({
-            modelNumber:"Boeing 757"
-        })
+        
     })
 }
 
