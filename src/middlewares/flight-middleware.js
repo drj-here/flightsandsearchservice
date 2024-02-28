@@ -1,3 +1,4 @@
+const {clientErrors}=require('../utils/Error-codes')
 const validateCreateFlight=(req,res,next)=>{
     if(!req.body.flightNumber || 
         !req.body.airplaneId ||
@@ -8,7 +9,7 @@ const validateCreateFlight=(req,res,next)=>{
         !req.body.price
         )
         {
-            return res.status(400).json({
+            return res.status(clientErrors.BAD_REQUEST).json({
                 data:{},
                 message:'all fields are required',
                 success:false,
