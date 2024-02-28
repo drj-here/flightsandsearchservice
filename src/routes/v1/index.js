@@ -1,6 +1,7 @@
 const express=require('express')
 const CityController=require('../../controllers/city-controller')
 const FlightController=require('../../controllers/flight-controller')
+const AirportController=require('../../controllers/airport-controller')
 const router=express.Router();
 
 router.post('/city',CityController.create)
@@ -11,4 +12,5 @@ router.get('/city/:id',CityController.get)
 router.get('/city/airports/:id',CityController.getAirports)
 router.post('/flights',FlightController.create) 
 router.get('/flights',FlightController.getAll)
+router.post('/airport',AirportController.create)
 module.exports=router;
